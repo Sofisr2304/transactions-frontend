@@ -42,9 +42,39 @@ const deleteTransaction = async (id) => {
   return response.json();
 }
 
+const getCategories = async () => {
+  const response = await fetch(`${urlApi}/categories`, {
+      method: 'GET',
+      headers: headers
+    },
+  )
+  return response.json();
+}
+
+const getByCategory = async (category) => {
+  const response = await fetch(`${urlApi}/transactions/by-category?category=${category}`, {
+      method: 'GET',
+      headers: headers
+    },
+  )
+  return response.json();
+}
+
+const getByDate = async (startDate, endDate) => {
+  const response = await fetch(`${urlApi}/transactions/by-date?startDate=${startDate}&endDate=${endDate}`, {
+      method: 'GET',
+      headers: headers
+    },
+  )
+  return response.json();
+}
+
 export {
   getTransactions,
   addTransaction,
   deleteTransaction,
-  updateTransaction
+  updateTransaction,
+  getCategories,
+  getByCategory,
+  getByDate
 }

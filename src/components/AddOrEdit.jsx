@@ -31,8 +31,6 @@ const AddOrEdit = ({
   const [error, setError] = useState(initState);
 
   useEffect( () => {
-    console.log(currentTransaction)
-    console.log(typeModal)
     if (currentTransaction && typeModal === 'Edit') {
       if (currentTransaction.Type) {
         setType(currentTransaction.Type);
