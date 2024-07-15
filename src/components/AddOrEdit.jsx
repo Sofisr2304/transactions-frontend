@@ -3,6 +3,7 @@
 import { Button, Select, Label, Modal, TextInput, Datepicker, Textarea } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { addTransaction, updateTransaction } from "../services/transaction";
+import convertDate from "../utils";
 import Swal from 'sweetalert2';
 
 const errorFormat = {
@@ -25,7 +26,7 @@ const AddOrEdit = ({
   const [type, setType] = useState('Income');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(convertDate(new Date()));
   const [description, setDescription] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
   const [error, setError] = useState(initState);
@@ -42,7 +43,7 @@ const AddOrEdit = ({
         setCategory(currentTransaction.Category);
       }
       if (currentTransaction.Date) {
-        setDate(currentTransaction.Date);
+        setDate(convertDate(new Date(currentTransaction.Date)));
       }
       if (currentTransaction.Description) {
         setDescription(currentTransaction.Description);
@@ -101,7 +102,7 @@ const AddOrEdit = ({
       }
     } else {
       try {
-        await updateTransaction(data);
+        await updateTransaction(data, currentTransaction.ID);
         showAlert('success', 'Transaction updated', '');
       } catch (error) {
         showAlert('error', 'Error in server');
@@ -199,7 +200,7 @@ const AddOrEdit = ({
               </div>
               <Datepicker
                 id="date"
-                onSelectedDateChanged={(event) => {setDate(event)}}
+                onSelectedDateChanged={(event) => {setDate(convertDate(event))}}
                 value={date}
                 required
               />

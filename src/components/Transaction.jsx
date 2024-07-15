@@ -83,7 +83,7 @@ const Transaction = () => {
   }
 
   return (
-    <div className="overflow-x-auto mt-16">
+    <div className="overflow-x-auto mt-16 h-[90vh]">
       <AddOrEdit
         typeModal={type}
         openModal={openModal}
@@ -138,10 +138,10 @@ const Transaction = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col justify-end">
           <Button onClick={() => Search()}>Search</Button>
         </div>
-        <div>
+        <div className="flex flex-col justify-end">
           <Button onClick={() => Clear()}>Clear</Button>
         </div>
 
@@ -149,7 +149,7 @@ const Transaction = () => {
       <Button pill onClick={() => { setType('Add'); setOpenModal(true) }} className="absolute top-1 right-1 z-10">
         <HiOutlinePlusSm className="h-6 w-6" />
       </Button>
-      <Table>
+      <Table className="mt-4">
         <Table.Head>
           <Table.HeadCell>Type</Table.HeadCell>
           <Table.HeadCell>Amount</Table.HeadCell>
